@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PXE ANUVAD</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <img
+        src="{{ url_for('static', filename='images/logo.png') }}"
+        alt="PXE ANUVAD">
+
+    <div class="header-text">
+
+        <h1>PXE ANUVAD</h1>
+
+        <p>Offline Multilingual Document Translation System</p>
+
+    </div>
+
+</header>
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+<form
+id="translateForm"
+enctype="multipart/form-data">
+
+<div class="dashboard">
+
+<!-- ================= Upload Card ================= -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-file-arrow-up"></i>
+
+Upload Document
+
+</h2>
+
+<label
+class="upload-box"
+id="dropZone">
+
+<i class="fa-solid fa-cloud-arrow-up"></i>
+
+<h3>
+
+Drag & Drop
+
+</h3>
+
+<p>
+
+or Click to Browse
+
+</p>
+
+<div id="selectedFile">
+
+No file selected
+
+</div>
+
+<input
+
+type="file"
+
+id="file"
+
+name="file"
+
+accept=".pdf,.png,.jpg,.jpeg"
+
+required>
+
+</label>
+
+</div>
+
+<!-- ================= Translation Settings ================= -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-language"></i>
+
+Translation Settings
+
+</h2>
+
+<div class="info-box">
+
+🌐 Source Language
+
+<br>
+
+<strong>
+
+Auto Detect
+
+</strong>
+
+</div>
+
+<label>
+
+Target Language
+
+</label>
+
+<select
+
+name="target_language"
+
+required>
+
+<option value="">
+
+Select Target Language
+
+</option>
+
+<option>Hindi</option>
+
+<option>English</option>
+
+<option>Assamese</option>
+
+<option>Bengali</option>
+
+<option>Bodo</option>
+
+<option>Dogri</option>
+
+<option>Gujarati</option>
+
+<option>Kannada</option>
+
+<option>Kashmiri</option>
+
+<option>Konkani</option>
+
+<option>Maithili</option>
+
+<option>Malayalam</option>
+
+<option>Manipuri</option>
+
+<option>Marathi</option>
+
+<option>Nepali</option>
+
+<option>Odia</option>
+
+<option>Punjabi</option>
+
+<option>Sanskrit</option>
+
+<option>Santali</option>
+
+<option>Sindhi</option>
+
+<option>Tamil</option>
+
+<option>Telugu</option>
+
+<option>Urdu</option>
+
+</select>
+
+</div>
+
+</div>
+<!-- ================= Translate Button ================= -->
+
+<div class="translate-card">
+
+<button
+id="translateBtn"
+type="submit">
+
+<i class="fa-solid fa-language"></i>
+
+Translate Document
+
+</button>
+
+</div>
+
+</form>
+
+<!-- ================= Progress ================= -->
+
+<div
+class="progress"
+id="progress">
+
+<h3>
+
+<i class="fa-solid fa-gears"></i>
+
+Processing Document...
+
+</h3>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+id="progressFill">
+
+</div>
+
+</div>
+
+<div class="status">
+
+<div>
+
+📤 Uploading Document...
+
+</div>
+
+<div>
+
+🔍 Extracting Text...
+
+</div>
+
+<div>
+
+🌐 Detecting Language...
+
+</div>
+
+<div>
+
+🔄 Translating Document...
+
+</div>
+
+<div>
+
+📄 Generating PDF...
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= Result Card ================= -->
+
+<div
+class="result-card"
+id="resultCard">
+
+<h2>
+
+<i class="fa-solid fa-circle-check"></i>
+
+Translation Completed Successfully
+
+</h2>
+
+<p id="resultMessage">
+
+Your document has been translated successfully.
+
+</p>
+
+<br>
+
+<div
+style="display:flex;
+gap:20px;
+flex-wrap:wrap;">
+
+<a
+id="downloadBtn"
+href="#"
+style="flex:1;
+text-decoration:none;">
+
+<button
+type="button">
+
+<i class="fa-solid fa-download"></i>
+
+Download Translated PDF
+
+</button>
+
+</a>
+
+<button
+
+type="button"
+
+onclick="window.location.reload();"
+
+style="flex:1;">
+
+<i class="fa-solid fa-rotate-right"></i>
+
+Translate Another Document
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= Footer ================= -->
+
+<div class="footer">
+
+<p>
+
+PXE ANUVAD © 2026
+
+</p>
+
+<p>
+
+Offline Multilingual Document Translation System
+
+</p>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

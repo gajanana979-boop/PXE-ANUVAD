@@ -281,6 +281,6 @@ Example:
 
 # Developed By
 
-Developed as part of the **DRDO PXE Internship Project**.
+Team PXE ANUVAD
 
 ---

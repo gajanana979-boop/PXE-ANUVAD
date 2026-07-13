@@ -12,6 +12,7 @@ class TranslationPipeline:
 
         self.ocr = OCRReader()
 
+
     def process_document(self, file_path, target_language):
 
         file_type = validate_file(file_path)
@@ -29,12 +30,15 @@ class TranslationPipeline:
 
                 blocks = self.ocr.extract_pdf(file_path)
 
-        # ---------- Image ----------
+        # ---------- IMAGE ----------
         else:
 
             blocks = self.ocr.extract_text(file_path)
 
-        translated_blocks = []
+
+        # ---------- CLEAN ALL TEXT BLOCKS ----------
+
+        cleaned_blocks = []
 
         for block in blocks:
 
@@ -43,19 +47,67 @@ class TranslationPipeline:
             if not text:
                 continue
 
-            source_language = detect_language(text)
+            cleaned_blocks.append({
 
-            if source_language == "Unknown":
+                "block": block,
+
+                "text": text
+
+            })
+
+
+        # No readable text found
+        if not cleaned_blocks:
+
+            return []
+
+
+        # ---------- DETECT DOCUMENT LANGUAGE ONCE ----------
+
+        complete_text = " ".join(
+
+            item["text"]
+
+            for item in cleaned_blocks
+
+        )
+
+        document_source_language = detect_language(
+            complete_text
+        )
+
+        print(
+            "\nDetected Document Language:",
+            document_source_language
+        )
+
+
+        # ---------- TRANSLATE ALL BLOCKS ----------
+
+        translated_blocks = []
+
+        for item in cleaned_blocks:
+
+            block = item["block"]
+
+            text = item["text"]
+
+            if document_source_language == "Unknown":
 
                 translated_text = text
 
             else:
 
                 translated_text = translate(
+
                     text,
-                    source_language,
+
+                    document_source_language,
+
                     target_language
+
                 )
+
 
             translated_blocks.append({
 
@@ -71,6 +123,7 @@ class TranslationPipeline:
 
             })
 
+
         return translated_blocks
 
 
@@ -78,16 +131,26 @@ if __name__ == "__main__":
 
     pipeline = TranslationPipeline()
 
-    file_path = input("Enter File Path : ").strip()
+    file_path = input(
+        "Enter File Path : "
+    ).strip()
 
-    target_language = input("Target Language : ").strip()
+    target_language = input(
+        "Target Language : "
+    ).strip()
 
     translated_blocks = pipeline.process_document(
+
         file_path,
+
         target_language
+
     )
 
-    print("\nTotal Translated Blocks :", len(translated_blocks))
+    print(
+        "\nTotal Translated Blocks :",
+        len(translated_blocks)
+    )
 
     if translated_blocks:
 

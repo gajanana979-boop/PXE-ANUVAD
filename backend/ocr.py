@@ -10,7 +10,7 @@ class OCRReader:
         print("Loading EasyOCR model...")
 
         self.reader = easyocr.Reader(
-            ['en'],
+            ['hi','en'],
             gpu=False
         )
 
